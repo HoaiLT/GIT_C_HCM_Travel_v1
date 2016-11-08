@@ -32,7 +32,9 @@ class Map_HCM_C extends CI_Controller{
        
         $this->load->view('template/map_location');
     }
-    
+     function directions(){
+        $this->load->view('template/google_directions');
+    }
 }
 ?>
 
