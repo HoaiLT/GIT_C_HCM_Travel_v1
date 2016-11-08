@@ -9,7 +9,7 @@ class Load_GeoJson_M extends CI_Model{
 //				FROM diem_dulich_hcm as atm
 
             function get_geojson(){  
-      $query = $this->db->query("SELECT gid,ten,ten_duong,phuong_xa,quan_huyen,gioi_thieu,so_dt,website,icon, public.ST_AsGeoJSON(geom) AS geojson FROM diem_dulich_hcm");
+      $query = $this->db->query("SELECT gid,ten,ten_duong,phuong_xa,quan_huyen,gioi_thieu,so_dt,website,hinh_anh, public.ST_AsGeoJSON(geom) AS geojson FROM diem_dulich_hcm");
      // $diadiems['diadiems'] = $query->row_array();
       //Build GeoJSON feature collection array
             $geojson = array(
@@ -23,21 +23,11 @@ class Load_GeoJson_M extends CI_Model{
                 $options=$row;
                 # Remove geojson and geometry fields from properties
                unset($properties['geojson']);
-               unset($options['gid']);
-                unset($options['geojson']);
-               unset($options['ten']);
-               unset($options['ten_duong']);
-               unset($options['phuong_xa']);
-               unset($options['quan_huyen']);
-               unset($options['gioi_thieu']);
-               unset($options['so_dt']);
-               unset($options['website']);
-            
                 $feature = array(
                     'type' => 'Feature',
                     'geometry' => json_decode($row['geojson'], true),
                     'id' => $row['gid'],
-                    'options' => $options,
+                    
                     'properties' => $properties
                     );
                   # Add feature arrays to feature collection array
@@ -48,7 +38,7 @@ class Load_GeoJson_M extends CI_Model{
                          fwrite($fp, $response);}
 
                          function get_hotel(){  
-      $query = $this->db->query("SELECT gid,ten,ten_duong,phuong_xa,quan_huyen,gioi_thieu,so_dt,website,icon, public.ST_AsGeoJSON(geom) AS geojson FROM diem_khachsan_hcm");
+      $query = $this->db->query("SELECT gid,ten,ten_duong,phuong_xa,quan_huyen,gioi_thieu,so_dt,website,hinh_anh, public.ST_AsGeoJSON(geom) AS geojson FROM diem_khachsan_hcm");
      // $diadiems['diadiems'] = $query->row_array();
       //Build GeoJSON feature collection array
             $geojson = array(

@@ -85,7 +85,7 @@ app.controller('MapCtrl', function ($scope,$http,$mdSidenav,$stateParams,uiGmapG
     //HAM cua MARKER TRONG TRANG MAP.PHP
      $scope.onMarkerClicked = function (marker) {
      $mdSidenav('left').toggle();
-     $state.go("detail", {id: marker.id,hinhanh: marker.properties['icon'],ten:marker.properties['ten'],geometry:marker.geometry['coordinates'],quanhuyen:marker.properties['quan_huyen'],phuongxa:marker.properties['phuong_xa'],gioithieu:marker.properties['gioi_thieu']});
+     $state.go("detail", {id: marker.id,hinhanh: marker.properties['hinh_anh'],ten:marker.properties['ten'],geometry:marker.geometry['coordinates'],quanhuyen:marker.properties['quan_huyen'],phuongxa:marker.properties['phuong_xa'],gioithieu:marker.properties['gioi_thieu']});
      };
 
     //    $http.get("./diadiem.json").then(function(response){
@@ -105,7 +105,7 @@ app.controller('MapCtrl', function ($scope,$http,$mdSidenav,$stateParams,uiGmapG
      $scope.onclickDetail =function(marker){
    
      $mdSidenav('left').toggle();
-     $state.go("detail", {id: marker.id,hinhanh: marker.properties['icon'],ten:marker.properties['ten'],geometry:marker.geometry['coordinates'],quanhuyen:marker.properties['quan_huyen'],phuongxa:marker.properties['phuong_xa'],gioithieu:marker.properties['gioi_thieu']});   
+     $state.go("detail", {id: marker.id,hinhanh: marker.properties['hinh_anh'],ten:marker.properties['ten'],geometry:marker.geometry['coordinates'],quanhuyen:marker.properties['quan_huyen'],phuongxa:marker.properties['phuong_xa'],gioithieu:marker.properties['gioi_thieu']});   
      marker.showWindow = true;
      };
      
