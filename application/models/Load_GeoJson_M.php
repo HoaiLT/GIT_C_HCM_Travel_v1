@@ -20,12 +20,14 @@ class Load_GeoJson_M extends CI_Model{
               foreach ($query->result_array() as $row)
               {
                 $properties = $row;
+                $options=$row;
                 # Remove geojson and geometry fields from properties
                unset($properties['geojson']);
                 $feature = array(
                     'type' => 'Feature',
                     'geometry' => json_decode($row['geojson'], true),
                     'id' => $row['gid'],
+                    
                     'properties' => $properties
                     );
                   # Add feature arrays to feature collection array

@@ -44,7 +44,7 @@ app.factory('Markers', function($http) {
   };
 })
   /* global google */;
-app.controller('MapCtrl', function ($scope,$http,$mdSidenav,$stateParams,uiGmapGoogleMapApi){
+app.controller('MapCtrl', function ($scope,$http,$mdSidenav,$stateParams,uiGmapGoogleMapApi,$state){
     
     $scope.toggleLeft = buildToggler('left');
     function buildToggler(componentId) {
@@ -53,21 +53,27 @@ app.controller('MapCtrl', function ($scope,$http,$mdSidenav,$stateParams,uiGmapG
       };
     };
     $scope.map = {
-       center:   new google.maps.LatLng(10.774114,106.688571),
+       center:  {
+       latitude:10.774114,
+       longitude: 106.688571},
        zoom: 13,
        mapTypeId: 'roadmap',
        pan: true,
        refresh: false,
        control: {},
-       events: {},
-       bounds: {},
+       events: { },
        options: {
+        pixelOffset: {width:-1,height:-20},
         streetViewControl: false,
         panControl: false,
         maxZoom: 20,
-        minZoom: 3
-      },
+        minZoom: 3,
+        draggable: true      
        
+      },
+
+       bounds: {},
+
        markers:[]
       };
      uiGmapGoogleMapApi.then(function () {
@@ -76,10 +82,17 @@ app.controller('MapCtrl', function ($scope,$http,$mdSidenav,$stateParams,uiGmapG
           });
 
         });
-        
+    //HAM cua MARKER TRONG TRANG MAP.PHP
+     $scope.onMarkerClicked = function (marker) {
+     $mdSidenav('left').toggle();
+     $state.go("detail", {id: marker.id,hinhanh: marker.properties['hinh_anh'],ten:marker.properties['ten'],geometry:marker.geometry['coordinates'],quanhuyen:marker.properties['quan_huyen'],phuongxa:marker.properties['phuong_xa'],gioithieu:marker.properties['gioi_thieu']});
+     };
+
     //    $http.get("./diadiem.json").then(function(response){
 //        $scope.markers =  response.data.features;
 //    }); 
+
+// LAY DU LIEU TU FILE JSON
     $http.get("./khachsan_local.json").then(function(response){
     $scope.khachsan_local =  response.data.features;
     });
@@ -87,10 +100,22 @@ app.controller('MapCtrl', function ($scope,$http,$mdSidenav,$stateParams,uiGmapG
     $http.get("./diem_khachsan.json").then(function(response){
     $scope.diem_khachsan =  response.data.features;
     });
-        
-     $scope.onMarkerClicked = function (marker) {
+
+//HAM cua TRANG SIDEBAR.PHP
+     $scope.onclickDetail =function(marker){
+   
      $mdSidenav('left').toggle();
-  };
+     $state.go("detail", {id: marker.id,hinhanh: marker.properties['hinh_anh'],ten:marker.properties['ten'],geometry:marker.geometry['coordinates'],quanhuyen:marker.properties['quan_huyen'],phuongxa:marker.properties['phuong_xa'],gioithieu:marker.properties['gioi_thieu']});   
+     marker.showWindow = true;
+     };
+     
+     
+
+  //HAM HIEN THI THONG TIN INFOR WINDOW
+  $scope.closeClick= function (marker) {
+        marker.showWindow = false;
+        $scope.$apply();
+      };
 
     $scope.id = $stateParams.id;
     $scope.hinhanh = $stateParams.hinhanh;

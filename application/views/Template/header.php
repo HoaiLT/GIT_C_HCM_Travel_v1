@@ -119,6 +119,7 @@
                                       </script>
                                       <div ui-view="map"></div>
                                       <div ui-view="map_location"></div>
+                                      <div ui-view="map_detail"></div>
                         </div>
                 </md-content>
               </div>

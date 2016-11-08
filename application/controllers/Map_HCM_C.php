@@ -23,6 +23,7 @@ class Map_HCM_C extends CI_Controller{
         $this->load->view('template/detail');
         $this->Load_GeoJson_M->get_khachsan($id);
     }
+    
     function map()
     {
         $this->load->view('template/map');
@@ -32,9 +33,12 @@ class Map_HCM_C extends CI_Controller{
        
         $this->load->view('template/map_location');
     }
-     function directions(){
-        $this->load->view('template/google_directions');
+         function map_detail()
+    {
+       
+        $this->load->view('template/map_detail');
     }
+    
 }
 ?>
 
