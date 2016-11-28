@@ -3,7 +3,11 @@
     <type>org.netbeans.modules.php.project</type>
     <configuration>
         <data xmlns="http://www.netbeans.org/ns/php-project/1">
-            <name>C_HCM_Travel</name>
+            <name>C_HCM_Travel_v1</name>
         </data>
+        <spellchecker-wordlist xmlns="http://www.netbeans.org/ns/spellchecker-wordlist/1">
+            <word>hongthuy</word>
+            <word>tiet</word>
+        </spellchecker-wordlist>
     </configuration>
 </project>

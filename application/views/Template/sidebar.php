@@ -1,10 +1,19 @@
-<div ng-repeat="marker in map.markers" ng-cloak="" class="sidenavdemoCustomSidenav" ng-controller="MapCtrl">                                       
-    <md-content ng-click="onclickDetail(marker)" flex="" layout-padding="" style=" border: 0px solid black;padding-left: 10px;" ng-controller="MapCtrl">
-            <div  style="border: 0px solid black; margin-bottom: 5px;">
-              <img src={{marker.properties['hinh_anh']}} alt="{{marker.properties['ten']}}" height="150" width="250" /> 
-                <h4>{{marker.properties['ten']}}</h4>
-                          <p>{{marker.properties['dia_chi']}}</p>
-                          <p>Tọa độ:{{marker.geometry.coordinates}}</p>
-            </div>
-    </md-content>
+<style>
+
+div.polaroid {
+  width: 295px;
+   box-shadow: 0 0 4px 2px rgba(0, 0, 0, 0.3);
+  text-align: center;
+}
+.sidenavdemoCustomSidenav div:hover {
+    box-shadow: 0 6px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+</style>
+<div ng-repeat="marker in map.markers" ng-click=" onSidebarClicked(marker)" ng-cloak="" class="sidenavdemoCustomSidenav" ng-controller="MapCtrl" >
+            <div class="polaroid">
+              <img src={{marker.properties['hinh_anh']}} alt="{{marker.properties['ten']}}"  style="width:100%"/>
+                <p style="padding-top:8px; padding-bottom:10px; font-size:1.2em">{{marker.properties['ten']}}</p>
+          </div>
 </div>
+

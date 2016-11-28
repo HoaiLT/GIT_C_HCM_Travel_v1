@@ -6,7 +6,7 @@ body {
   top: 0;
   left: 0;
   min-width: 100%;
-  height: 590px; 
+  height: 590px;
 }
 
 .navbar-inverse {background-color:white; border-color: whitesmoke;}
@@ -21,8 +21,9 @@ a:hover{color:#3498db}
 #myCarousel1 .carousel-control.right, #myCarousel1 .carousel-control.left,
 #myCarousel2 .carousel-control.right, #myCarousel2 .carousel-control.left {background: none;color: #057C00;font-size: 3em; width: 6%;}
 #myCarousel .container{padding:0}
-.carousel .item {height: 590px; background-color: #FFF;} /*màu nền dưới cột chứa bản đồ*/ 
+.carousel .item {height: 590px; background-color: #FFF;} /*màu nền dưới cột chứa bản đồ*/
 footer{ padding:10px ; background:white; color:black;}
 #pfooter{
-   padding-left:20px ; 
+   padding-left:20px ;
 }
+

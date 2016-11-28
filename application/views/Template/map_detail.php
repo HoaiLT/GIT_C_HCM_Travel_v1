@@ -1,37 +1,35 @@
 <div  style="height:100%;">
-    <ui-gmap-google-map id="map" 
+    <ui-gmap-google-map id="map"
                         center="map.center"
                         zoom="map.zoom"
-                        events="map.events"
                         bounds="map.bounds"
-                        options="map.options"
+                        options="map.window.options"
                         pan="true"
                         control="map.control">
-        <ui-gmap-marker ng-repeat="m in map.markers" models="map.markers" 
-                        coords="m.geometry"  
-                
-                        click="onMarkerClicked(m)"
-                        idkey="m.id">
-         <ui-gmap-window show="m.showWindow"
-                         ng-cloak="">
-         <div >
-             <img src={{m.properties['hinh_anh']}} alt="{{m.properties['ten']}}" height="50" width="50" />
-             <p>{{m.properties['ten']}}</p>
-             <p class="muted">Địa chỉ:{{m.properties['phuong_xa']}}{{m.properties['quan_huyen']}} </p>
-             <p>{{m.properties['gioi_thieu']}}</p>
-             <a  ng-click="$root.windowClicked($parent.m.id)"> thong tin chi tiet</a>
-         </div>
-        </ui-gmap-window> 
-     </ui-gmap-marker>
-        
-<!--        <ui-gmap-window show="showWindow" ng-cloak="">
-         <div >
-             <img src={{properties['hinh_anh']}} alt="{{hinhanh}}" height="50" width="50" />
-             <p>{{ten}}</p>
-             <p class="muted">Địa chỉ:{{phuongxa}}{{quanhuyen}} </p>
-             <a  ng-click="$root.windowClicked($parent.id)"> thong tin chi tiet</a>
-         </div>
-        </ui-gmap-window> -->
+
+        <ui-gmap-markers  models="filtermarkers" fit="true" idKey="'id'" icon="'icon'" coords="'geometry'" events="map.events_detail" >
+        </ui-gmap-markers>
+
+         <ui-gmap-markers models="map.hotels" idKey="'id'" icon="'icon'" coords="'geometry'" events="map.events_detail" >
+        </ui-gmap-markers>
+
+        <ui-gmap-markers models="map.xang" idKey="'id'" icon="'icon'" coords="'geometry'" events="map.events_detail" >
+        </ui-gmap-markers>
+
+         <ui-gmap-markers models="map.yte" idKey="'id'" icon="'icon'" coords="'geometry'" events="map.events_detail" >
+        </ui-gmap-markers>
+
+         <ui-gmap-window
+             show="map.window.show"
+             coords="map.window.model.geometry"
+             templateUrl="'./infowindow.tpl'"
+             templateParameter="map.window.model"
+             options="map.window.options"
+            closeClick="map.window.closeClick()">
+             ng-cloak>
+        </ui-gmap-window>
 
  </ui-gmap-google-map>
-</div>         
+</div>
+
+
