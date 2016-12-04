@@ -50,7 +50,7 @@
     z-index: 1;
     top: 0;
     left: 0;
-    background-color: #111;
+    background-color: #FFFFFF;
     overflow-x: hidden;
     transition: 0.5s;
     padding-top: 60px;
@@ -123,6 +123,37 @@
     .search-query:focus + button {
         z-index: 3;
     }
+
+    .search ul {
+    position: absolute;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    width: 300px;
+    background-color: #f1f1f1;
+
+}
+
+ .search li a {
+    display: block;
+    color: #000;
+    padding: 8px 16px;
+    text-decoration: none;
+
+}
+
+/* Change the link color on hover */
+ .search li a:hover {
+    background-color:#eeba30;
+    color: white;
+}
+.search img {
+    border-radius:50%;
+    vertical-align:top;
+  }
+  img.middle {
+    vertical-align: text-bottom;
+}
   </style>
   <script>
 function openNav() {
@@ -142,12 +173,13 @@ function closeNav() {
               <div class='col-md-4'>
                 <div class="navbar-header">
                       <div id="mySidenav" class="sidenav">
-                        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-                        <a href="<?php echo base_url(); ?>">Trang chủ</a>
-                        <a href="<?php echo base_url(); ?>Map_HCM_C/map_directions" target="_blank"> Hướng dẫn đường đi</a>
-                        <a href="<?php echo base_url(); ?>Kehoach_C" target="_blank">Kế hoạch du lịch của tôi.</a>
-                        <a href="<?php echo base_url(); ?>about.html">Giới thiệu</a>
-                        <a href="<?php echo base_url(); ?>contact.html">Liên hệ</a>
+                      <div>DU LỊCH HỒ CHÍ MINH <a href="javascript:void(0)" class="closebtn" onclick="closeNav()"> &times;</a></div>
+                       <div><a href="<?php echo base_url(); ?>about.html">Giới thiệu</a></div>
+                         <div>  <a href="<?php echo base_url(); ?>Kehoach_C" target="_blank">Tư vấn kế hoạch du lịch</a></div>
+                        <div> <a href="<?php echo base_url(); ?>Map_HCM_C/map_directions" target="_blank"> Tìm đường đi</a></div>
+                       <div> <a href="<?php echo base_url(); ?>Kehoach_C" target="_blank">Tiện ích</a></div>
+                       <div><a href="<?php echo base_url(); ?>contact.html">Liên hệ</a></div>
+
                       </div>
                   <span style="font-size:25px;cursor:pointer" onclick="openNav()">&#9776;</span>
                    <a href="<?php echo base_url(); ?>">Map Online</a>
@@ -158,22 +190,27 @@ function closeNav() {
                        <div ng-controller="MapCtrl">
 
                         <div id="custom-search-input">
-                            <div class="input-group col-md-5">
-                                <input type="text" class="  search-query form-control" ng-model="searchString" placeholder="Bạn muốn đến..." />
+                            <div class="input-group col-md-6">
+                                <input type="text" class="search-query form-control" ng-focus="focus=true"  ng-blur="focus = false" ng-model="searchString" placeholder="Bạn muốn đến..." />
                                 <span class="input-group-btn">
                                     <button class="btn btn-danger" type="button">
                                         <span class=" glyphicon glyphicon-search"></span>
                                     </button>
                                 </span>
                             </div>
-                                         <ul >
-                                           <li ng-show="searchString" ng-repeat="i in map.markers | filter:searchString">
-                                               <a ng-click=" onSidebarClicked(i)" >  <p>{{i.properties['ten']}}</p></a>
-                                            </li>
-                                        </ul>
-                        </div>
 
                         </div>
+              <div class="search" >
+                     <ul >
+                         <li  ng-repeat="i in map.markers | filter: searchString" ng-click=" onSidebarClicked(i)" ng-show="searchString">
+                         <a>
+                            <p><img class="middle" src={{i.properties['hinh_anh']}} alt={{i.properties['ten']}} width="40px" height="40px"/> <p>{{i.properties['ten']}}</p>
+                                 <p>{{i.properties['ten_duong']}} {{i.properties['phuong_xa']}} {{i.properties['quan_huyen']}}</p></p>
+                            </a>
+                          </li>
+                      </ul>
+              </div>
+              </div>
                 </div>
                <div class='col-md-2'>
 

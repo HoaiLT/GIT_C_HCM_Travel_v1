@@ -35,7 +35,8 @@ if(!empty($authUrl)) {
   <div class="dropdown-content">
     <p><?php
       echo '<p><b>Name : </b>' . $userData['first_name'].' '.$userData['last_name'].'</p>';?>
-      <p>Hành trình của tôi.</p>
+      <p>Nhật ký hành trình</p>
+       <p>Tư vấn hành trình du lịch</p>
     <?php echo '<p><a href="'.base_url().'/Map_HCM_C/logout">Logout</a></p>';?>
 
 </p>

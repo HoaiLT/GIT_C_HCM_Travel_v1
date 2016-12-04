@@ -117,9 +117,10 @@ app.controller('MapCtrl', function ($scope,$http,$mdSidenav,$stateParams,uiGmapG
      $mdSidenav('left').toggle();
      $state.go("detail", {id: marker.id,hinhanh: marker.properties['hinh_anh'],ten:marker.properties['ten'],geometry:marker.geometry['coordinates'],quanhuyen:marker.properties['quan_huyen'],phuongxa:marker.properties['phuong_xa'],gioithieu:marker.properties['gioi_thieu'],duong:marker.properties['ten_duong'],website:marker.properties['website'],sodt:marker.properties['so_dt']});
      };
-
+     $scope.focus = true;
       //HAM cua SIDEBAR TO LOAD MAP_DETAIL AND DETAIL PAGE
      $scope.onSidebarClicked = function (marker) {
+       $scope.focus = !$scope.focus ;
       $mdSidenav('left').toggle();
       $state.go("detail_sidebar", {id: marker.id,hinhanh: marker.properties['hinh_anh'],ten: marker.properties['ten'],geometry:marker.geometry['coordinates'],quanhuyen:marker.properties['quan_huyen'],phuongxa:marker.properties['phuong_xa'],gioithieu:marker.properties['gioi_thieu'],duong:marker.properties['ten_duong'],website:marker.properties['website'],sodt:marker.properties['so_dt']});
      };

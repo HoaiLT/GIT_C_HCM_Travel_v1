@@ -27,7 +27,7 @@ class Load_GeoJson_M extends CI_Model{
                     'type' => 'Feature',
                     'geometry' => json_decode($row['geojson'], true),
                     'id' => $row['gid'],
-                    'icon'=>'../C_HCM_Travel_v1/public/map_libs/img/icon/travel.png',
+                    'icon'=>'../C_HCM_Travel_v1/public/map_libs/img/icon/vietnam_1.png',
                     'properties' => $properties
                     );
                   # Add feature arrays to feature collection array
@@ -211,7 +211,7 @@ function kehoach_thamkhao(){
               'type'      => 'Feature',
               'geometry'  => json_decode($row['geojson'], true),
               'id'        => $row['gid'],
-              'icon'=>'../C_HCM_Travel_v1/public/map_libs/img/icon/travel.png',
+              'icon'=>'../C_HCM_Travel_v1/public/map_libs/img/icon/star_1.png',
               "latitude" => $row['y'],
               "longitude" => $row['x'],
               'properties'=> $properties);

@@ -35,16 +35,29 @@
     right: 0;
     left: 0;
 }
-.selected {
-  background: #ddd;
-}
+
   </style>
 </head>
 <body ng-controller="MapkhCtrl">
     <script
      src="http://maps.googleapis.com/maps/api/js?key=AIzaSyAePY8xEeKl8-3U1GqmcrYl6OdPPtyOH5k&sensor=false">
     </script>
-    <div class="row">
+     <nav class="navbar navbar-default " role="navigation" style="padding-right: 5px;margin-bottom:0px">
+            <div class='row' >
+              <div class='col-md-4'>
+                <div class="navbar-header">
+                   <h2><a href="<?php echo base_url(); ?>">Map Online</a></h2>
+                </div>
+                </div>
+               <!--  SEARCH BOX -->
+                  <div class='col-md-6' >
+
+                </div>
+               <div class='col-md-2'>
+               </div>
+          </div>
+ </nav>
+    <div class="row" >
         <div  class="col-md-3" style=" border: 0px solid black;overflow: auto;padding-left: 10px; width:330px; height:600px " >
             <div ui-view="sidebar_kehoach"></div>
             <div ui-view="sidebar_kehoach_detail"></div>

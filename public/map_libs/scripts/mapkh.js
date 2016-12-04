@@ -14,61 +14,133 @@ app.run(["$rootScope", "$state", "$stateParams", function($rootScope, $state, $s
     $rootScope.$stateParams = $stateParams;
 }]);
   /* global google, _ */;
-app.controller('MapkhCtrl', function ($scope,$http,$mdSidenav,$stateParams,uiGmapGoogleMapApi,$state,$filter){
- $scope.map = {
-       showWindow:false,
+app.controller('MapkhCtrl', function ($rootScope,$scope,$http,$mdSidenav,$stateParams,uiGmapGoogleMapApi,$state,$filter,uiGmapIsReady){
+   uiGmapGoogleMapApi.then(function (maps) {
+    $scope.map = {
        center:  {
-       latitude:10.774114,
-       longitude: 106.688571},
-       zoom: 17,
-       mapTypeId: 'roadmap',
-       pan: true,
-       refresh: false,
+                     latitude:10.774114,
+                     longitude: 106.688571},
+                     mapTypeId: 'roadmap',
+                     pan: true,
+                     refresh: false,
        control: {},
+        zoom: 17,
+        options: {},
+         control: {},
        window: {
-            model: {},
-            show: false,
-        options: {
-         pixelOffset: {width:-1,height:-20}
-//      icon:'../C_HCM_Travel_v1/public/map_libs/img/icon/Travel_baloon_icon48.png'
-        },
-         closeClick: function() {
-          this.show = false;
-        }
-          },
+                    show: true,
+                    options: {
+                                 pixelOffset: {width:-1,height:-20
 
-       events: {
-        click: function(marker, eventName, model, args) {
-          $scope.map.window.model = model;
-          $scope.map.window.show = true;
-        }
-      },
-
+                     }
+            //      icon:'../C_HCM_Travel_v1/public/map_libs/img/icon/Travel_baloon_icon48.png'
+                    },
+                     closeClick: function() {
+                      this.show = false;
+                    }
+                 },
+             events: {
+              click: function(marker, eventName, model, arguments) {
+                $scope.map.window.model = model;
+                $scope.map.window.show = true;
+                console.log(  $scope.map.window.model);
+              }
+            },
        bounds: {},
        markers:[],
        hotels:[],
        xang:[],
        yte:[],
        kh_detail:[],
-       duongdi_detail:[]
-      };
+       duongdi_detail:[],
+       info:[]
+        };
+    });
+
     $scope.onclickDetail_KH = function (i) {
       $state.go("/Kehoach_C/kehoach_detail", {ten: i.properties['ten_kh']});
-
      };
+
+
+     // $scope.onClick = function(data) {
+     //             $scope.map.window.marker.geometry = data.geometry;
+     //            $scope.map.window.show=true;
+     //            console.log(data);
+     //   };
+    // uiGmapIsReady.promise() // if no value is put in promise() it defaults to promise(1)
+    // .then(function (instances) {
+    //     console.log(instances[0].map); // get the current map
+    // })
+    //     .then(function () {
+    //     $scope.addMarkerClickFunction($scope.filtermarkers);
+    // });
+
+    //  $scope.addMarkerClickFunction = function (markersArray) {
+    //     angular.forEach(markersArray, function (value, key) {
+    //         value.onClick = function () {
+    //             $scope.onClick(value.data);
+    //             $scope.map.window.marker = value;
+    //             $scope.map.window.show=true;
+    //         };
+    //     });
+    // };
+    // $scope.onClick = $scope.$on('$stateChangeStart', function(e, model){
+    //           e.preventDefault();
+    //         $scope.map.window.model = model;
+    //         $scope.map.window.show = true;
+    //          console.log($scope.map.window.model);
+    // });
+
+   uiGmapGoogleMapApi.then(function () {
+      $scope.onClick=function(e, model){
+              e.preventDefault();
+            $scope.map.window.model = model;
+            $scope.map.window.show = true;
+             console.log( $scope.map.window.model);
+    }
+  });
+
 
   $scope.ten = $stateParams.ten;
 
- // $scope.openInfoWindow = function(e, selectedMarker){
- //       $scope.map.window.model = selectedMarker;
- //        $scope.map.window.show = true;
- //         $scope.map.zoom=20
- //    };
-// $scope.onClick = function(e,model){
-//      $scope.map.window.model = model;
-//      $scope.map.window.show = true;
-// };
+// // show infowindow cho diem bat dau
+//    uiGmapGoogleMapApi.then(function () {
+//         $http.get('chitiet_duongdi.json').then(function (response) {
+//         $scope.map.info = response.data.features;
+//       });  });
+//   $scope.$watch("map.info", function(){
+//   $scope.infoWindow = $filter("filter")($scope.map.info,$scope.ten);
+//   if (!$scope.infoWindow){
+//   return;
+//   }
+// $scope.inforWindow= {
+//         coords: $scope.infoWindow.map(function (m) {
+//             return {
+//                 latitude: m.latitude,
+//                 longitude: m.longitude
+//             };
+//         }),
+//         options: {
+//           disableAutoPan: true
+//         },
+//         show: true
+//       }
 
+// });
+
+ $scope.inforWindow = {
+        coords: {
+          latitude: 10.787964,
+          longitude: 106.704835
+        },
+        options: {
+          disableAutoPan: true
+        },
+        show: true
+      };
+
+
+// lay thong tin cho marker
    uiGmapGoogleMapApi.then(function () {
           $http.get('diadiem.json').then(function (response) {
             $scope.map.markers = response.data.features;
@@ -94,16 +166,16 @@ app.controller('MapkhCtrl', function ($scope,$http,$mdSidenav,$stateParams,uiGma
   $scope.filtermarkers = $filter("filter")($scope.map.kh_detail,$scope.ten);
   if (!$scope.filtermarkers){
   return;
-  }  });
+  } });
       // $http.get('kehoach_thamkhao_chitiet.json').then(function (response) {
       //   $scope.kehoach_thamkhao_chitiet = response.data.features;
       // });
+
  $scope.$watch("map.duongdi_detail", function(){
   $scope.duongdi = $filter("filter")($scope.map.duongdi_detail,$scope.ten);
   if (!$scope.duongdi){
   return;
   }
-
 $scope.polyline =
     {
         "path": $scope.duongdi.map(function (m) {
@@ -119,6 +191,7 @@ $scope.polyline =
         "geodesic": true,
         "visible": true
     };
+
   });
 
 });
@@ -140,7 +213,7 @@ app.config(function($stateProvider, $urlRouterProvider){
 
     });
     $stateProvider.state('/Kehoach_C/kehoach_detail', {
-               // parent: 'index',
+                //parent: 'index',
                url:'/Kehoach_C/kehoach_detail/:ten',
                views: {
                 'sidebar_kehoach_detail@': {
@@ -154,6 +227,7 @@ app.config(function($stateProvider, $urlRouterProvider){
             }
 
         });
+
 });
 
 

@@ -22,25 +22,22 @@
         width:340px;
         height:660px;
         background-color: white;
-       
+
       }
-    
+
     .search-query {
         margin-bottom: 7px;
-        width:250px;
+        width:260px;
         font-family: 'Roboto','sans-serif';
         font-size: 13px;
         border: 1px solid #afd9ee;
     }
-    .search-query:focus{
-        width: 260px;
-    }  
     #left-panel{
         font-family: 'Roboto','sans-serif';
         font-size: 14px;
-        
+
     }
 
 
-   
+
 

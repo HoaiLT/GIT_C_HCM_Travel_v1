@@ -1,5 +1,4 @@
 <div ng-controller="MapkhCtrl">
-<div>hongthuy</div>
     <img src={{parameter.properties['hinh_anh']}} alt="{{parameter.properties['ten']}}" height="50" width="50" />
     <p>{{parameter.properties['ten']}}</p>
     <p class="muted">Địa chỉ:{{parameter.properties['phuong_xa']}}{{parameter.properties['quan_huyen']}} </p>
