@@ -124,17 +124,18 @@ app.controller('MapCtrl', function ($scope,$http,$mdSidenav,$stateParams,uiGmapG
     //HAM cua MARKER TRONG TRANG MAP.PHP
      $scope.onMarkerClicked = function (marker) {
      $mdSidenav('left').toggle();
-     $state.go("detail", {id: marker.id,hinhanh: marker.properties['hinh_anh'],ten:marker.properties['ten'],geometry:marker.geometry['coordinates'],quanhuyen:marker.properties['quan_huyen'],phuongxa:marker.properties['phuong_xa'],gioithieu:marker.properties['gioi_thieu'],duong:marker.properties['ten_duong'],website:marker.properties['website'],sodt:marker.properties['so_dt']});
+     $state.go("detail", {id: marker.id,giomocua:marker.properties['gio_mo_cua'],giave:marker.properties['gia_ve'],hinhanh: marker.properties['hinh_anh'],ten:marker.properties['ten'],geometry:marker.geometry['coordinates'],quanhuyen:marker.properties['quan_huyen'],phuongxa:marker.properties['phuong_xa'],gioithieu:marker.properties['gioi_thieu'],duong:marker.properties['ten_duong'],website:marker.properties['website'],sodt:marker.properties['so_dt']});
      };
      $scope.focus = true;
       //HAM cua SIDEBAR TO LOAD MAP_DETAIL AND DETAIL PAGE
      $scope.onSidebarClicked = function (marker) {
+      console.log(marker);
        $scope.focus = !$scope.focus ;
       $mdSidenav('left').toggle();
-      $state.go("detail_sidebar", {id: marker.id,hinhanh: marker.properties['hinh_anh'],ten: marker.properties['ten'],geometry:marker.geometry['coordinates'],quanhuyen:marker.properties['quan_huyen'],phuongxa:marker.properties['phuong_xa'],gioithieu:marker.properties['gioi_thieu'],duong:marker.properties['ten_duong'],website:marker.properties['website'],sodt:marker.properties['so_dt']});
+      $state.go("detail_sidebar", {id: marker.id,giomocua:marker.properties['gio_mo_cua'],giave:marker.properties['gia_ve'], hinhanh: marker.properties['hinh_anh'],ten: marker.properties['ten'],geometry:marker.geometry['coordinates'],quanhuyen:marker.properties['quan_huyen'],phuongxa:marker.properties['phuong_xa'],gioithieu:marker.properties['gioi_thieu'],duong:marker.properties['ten_duong'],website:marker.properties['website'],sodt:marker.properties['so_dt']});
      };
      $scope.$watch("map.markers", function(){
-      $scope.filtermarkers = $filter("filter")($scope.map.markers,$scope.ten);
+      $scope.filtermarkers = $filter("filter")($scope.map.markers,$scope.id);
       if (!$scope.filtermarkers){
         return;
       }
@@ -154,15 +155,18 @@ app.controller('MapCtrl', function ($scope,$http,$mdSidenav,$stateParams,uiGmapG
     $scope.quanhuyen= $stateParams.quanhuyen;
     $scope.gioithieu= $stateParams.gioithieu;
     $scope.duong= $stateParams.duong;
-     $scope.website= $stateParams.website;
+    $scope.website= $stateParams.website;
     $scope.sodt= $stateParams.sodt;
+    $scope.giomocua= $stateParams.giomocua;
+    $scope.giave= $stateParams.giave;
+
 });
 
 app.config(function($stateProvider, $urlRouterProvider){
      $urlRouterProvider.otherwise('/Map_HCM_C');
       $stateProvider.state('detail',{
            parent: 'index',
-           url:'/detail/:id/:hinhanh/:ten/:geometry/:quanhuyen/:phuongxa/:gioithieu/:duong/:website/:sodt',
+           url:'/detail/:id/:giomocua/:giave/:hinhanh/:ten/:geometry/:quanhuyen/:phuongxa/:gioithieu/:duong/:website/:sodt',
            views:{
             'detail@': {
                 templateUrl: 'Map_HCM_C/detail',
@@ -181,7 +185,7 @@ app.config(function($stateProvider, $urlRouterProvider){
 
     $stateProvider.state('detail_sidebar',{
            parent: 'index',
-           url:'/detail_sidebar/:id/:hinhanh/:ten/:geometry/:quanhuyen/:phuongxa/:gioithieu/:duong/:website/:sodt',
+           url:'/detail_sidebar/:id/:giomocua/:giave/:hinhanh/:ten/:geometry/:quanhuyen/:phuongxa/:gioithieu/:duong/:website/:sodt',
            views:{
             'detail@': {
                  templateUrl: 'Map_HCM_C/detail',

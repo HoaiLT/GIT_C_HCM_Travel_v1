@@ -9,7 +9,7 @@ class Load_GeoJson_M extends CI_Model{
 //				FROM diem_dulich_hcm as atm
 
 function get_geojson(){
-      $query = $this->db->query("SELECT gid,ten,ten_duong,phuong_xa,quan_huyen,gioi_thieu,so_dt,website,hinh_anh, ma_loai, public.ST_AsGeoJSON(geom) AS geojson FROM diem_dulich_hcm");
+      $query = $this->db->query("SELECT gid,ten,ten_google,ten_duong,phuong_xa,quan_huyen,gioi_thieu,so_dt,website,hinh_anh, ma_loai, public.ST_AsGeoJSON(geom) AS geojson,gio_mo_cua, gia_ve FROM diem_dulich_hcm");
      // $diadiems['diadiems'] = $query->row_array();
       //Build GeoJSON feature collection array
                                               $geojson = array(
@@ -234,7 +234,7 @@ function kehoach_thamkhao(){
                                                    fwrite($fp, $response);   }
 
  function kehoach_thamkhao_chitiet(){
-      $query = $this->db->query("SELECT kh.ten_kh,ct.ma_kh,ct.gid,ct.mota,ct.stt,d.ten,d.ten_duong,d.phuong_xa,d.quan_huyen,d.gioi_thieu,d.so_dt,d.website,d.hinh_anh, public.ST_AsGeoJSON(geom) AS geojson, d.x, d.y from kehoach_chitiet as ct, kehoach_dulich as kh, diem_dulich_hcm as d where ct.gid=d.gid and kh.ma_kh=ct.ma_kh order by ct.stt asc");
+      $query = $this->db->query("SELECT kh.ten_kh,ct.id,ct.ma_kh,ct.gid,ct.mota,ct.stt,d.ten,d.ten_duong,d.phuong_xa,d.quan_huyen,d.gioi_thieu,d.so_dt,d.website,d.hinh_anh, public.ST_AsGeoJSON(geom) AS geojson, d.x, d.y from kehoach_chitiet as ct, kehoach_dulich as kh, diem_dulich_hcm as d where ct.gid=d.gid and kh.ma_kh=ct.ma_kh order by ct.stt asc");
                                                         $geojson = array(
                                                           'type'      => 'FeatureCollection',
                                                           'features'  => array()
@@ -245,12 +245,13 @@ function kehoach_thamkhao(){
                                                             $properties = $row;
                                                             unset($properties['geojson']);
                                                             unset($properties['gid']);
+                                                            unset($properties['id']);
                                                             unset($properties['x']);
                                                             unset($properties['y']);
                                                             $feature = array(
                                                                 'type'      => 'Feature',
                                                                 'geometry'  => json_decode($row['geojson'], true),
-                                                                'id'        => $row['gid'],
+                                                                'id'        => $row['id'],
                                                                 'icon'=>'../C_HCM_Travel_v1/public/map_libs/img/icon/tourist.png',
                                                                 "latitude" => $row['y'],
                                                                 "longitude" => $row['x'],
@@ -366,6 +367,20 @@ function kehoach_thamkhao(){
   function detail_tour($ma_tour)
   {
      $query = $this->db->query("SELECT * from tour where ma_tour='$ma_tour'");
+     $result= $query->result_array();
+     return $result;
+  }
+
+   function print_kehoach($makh)
+  {
+     $query = $this->db->query("SELECT * from kehoach_chitiet a, diem_dulich_hcm b where  a.gid=b.gid and a.ma_kh='$makh' order by a.stt asc");
+     $result= $query->result_array();
+     return $result;
+  }
+
+     function kehoach($makh)
+  {
+     $query = $this->db->query("SELECT * from  kehoach_dulich where ma_kh='$makh'");
      $result= $query->result_array();
      return $result;
   }

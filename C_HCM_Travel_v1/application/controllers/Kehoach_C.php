@@ -7,6 +7,7 @@ class Kehoach_C extends CI_Controller{
      $this->load->model('User_login_M');
     $this->load->helper('file');
     $this->load->database();
+      $this->load->library('m_pdf');
 }
     function index(){
            $this->Load_GeoJson_M->get_geojson();
@@ -19,6 +20,35 @@ class Kehoach_C extends CI_Controller{
            $this->load->view('template/lapkehoach');
            $this->load->view('template/footer');
        }
+ public function kehoach()
+  {
+        $makh = $this->input->get('makh',TRUE);
+        $data['kh'] = $this->Load_GeoJson_M->kehoach($makh);
+        $data['items'] = $this->Load_GeoJson_M->print_kehoach($makh);
+        //load the view and saved it into $html variable
+       // $this->load->view('template/kehoach_pdf.php', $data, true);
+      // $this->load->view('template/kehoach_pdf.php', $data);
+$html=$this->load->view('template/kehoach_pdf.php', $data, true);
+
+        //this the the PDF filename that user will get to download
+$pdfFilePath = "kehoach.pdf";
+
+        //load mPDF library
+  $this->load->library('m_pdf');
+       //generate the PDF from the given html
+$this->m_pdf->pdf->WriteHTML($html);
+
+        //download it.
+ $this->m_pdf->pdf->Output($pdfFilePath, "D");
+    }
+ public function xem_kehoach()
+  {
+        $makh = $this->input->get('makh',TRUE);
+        $data['kh'] = $this->Load_GeoJson_M->kehoach($makh);
+        $data['items'] = $this->Load_GeoJson_M->print_kehoach($makh);
+        $this->load->view('template/kehoach_chitiet.php', $data);
+    }
+
 
     function map_kehoach()
     {

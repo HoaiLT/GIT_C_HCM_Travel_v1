@@ -28,6 +28,7 @@ app.controller('MapkhCtrl', function ($rootScope,$scope,$http,$mdSidenav,$stateP
         options: {},
          control: {},
        window: {
+                     model:{},
                     show: true,
                     options: {
                                  pixelOffset: {width:-1,height:-20
@@ -45,6 +46,7 @@ app.controller('MapkhCtrl', function ($rootScope,$scope,$http,$mdSidenav,$stateP
                //console.log($scope.map.window.model.properties['url_video']);
                 $scope.map.window.show = true;
                 $scope.url = $sce.trustAsResourceUrl(model.properties['url_video']);
+                console.log( $scope.map.window.model);
               }
             },
        bounds: {},
@@ -60,7 +62,9 @@ app.controller('MapkhCtrl', function ($rootScope,$scope,$http,$mdSidenav,$stateP
     });
 
     $scope.onclickDetail_KH = function (i) {
-      $state.go("/Kehoach_C/kehoach_detail", {id:i.id, ten: i.properties['ten_kh'], gioithieu: i.properties['gioi_thieu'], songay: i.properties['so_ngay_di'], phuongtien: i.properties['phuong_tien_di_chuyen'],video:i.properties['url_video']});
+      $state.go("/Kehoach_C/kehoach_detail", {id:i.id, ten: i.properties['ten_kh'], gioithieu: i.properties['gioi_thieu'],
+                songay:i.properties['thoi_gian'], phuongtien: i.properties['phuong_tien_di_chuyen'],
+                khoangcach:i.properties['tong_khoangcach'],video:i.properties['url_video']});
      };
 
      // $scope.onClick = function(data) {
@@ -93,8 +97,7 @@ app.controller('MapkhCtrl', function ($rootScope,$scope,$http,$mdSidenav,$stateP
     // });
 
    uiGmapGoogleMapApi.then(function () {
-      $scope.onClick=function(e, model){
-              e.preventDefault();
+      $scope.Onclick=function( model){
             $scope.map.window.model = model;
             $scope.map.window.show = true;
              console.log( $scope.map.window.model);
@@ -106,8 +109,8 @@ app.controller('MapkhCtrl', function ($rootScope,$scope,$http,$mdSidenav,$stateP
   $scope.gioithieu = $stateParams.gioithieu;
   $scope.songay = $stateParams.songay;
   $scope.phuongtien = $stateParams.phuongtien;
+  $scope.khoangcach = $stateParams.khoangcach;
   $scope.video = $sce.trustAsResourceUrl($stateParams.video);
-  //console.log($scope.video );
 
 // // show infowindow cho diem bat dau
 //    uiGmapGoogleMapApi.then(function () {
@@ -246,7 +249,7 @@ app.config(function($stateProvider, $urlRouterProvider){
     });
     $stateProvider.state('/Kehoach_C/kehoach_detail', {
                 //parent: 'index',
-               url:'/Kehoach_C/kehoach_detail/:id/:ten/:gioithieu/:songay/:phuongtien/:video',
+               url:'/Kehoach_C/kehoach_detail/:id/:ten/:gioithieu/:songay/:phuongtien/:khoangcach/:video',
                views: {
                 'sidebar_kehoach_detail@': {
                     templateUrl: 'Kehoach_C/sidebar_kehoach_detail',

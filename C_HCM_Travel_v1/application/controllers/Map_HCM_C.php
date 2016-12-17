@@ -20,6 +20,12 @@ class Map_HCM_C extends CI_Controller{
            $this->load->view('template/header');
            $this->load->view('template/footer');
        }
+
+  function waypoint_map()
+    {
+        $this->load->view('template/waypoint_map');
+        //$this->Load_GeoJson_M->get_khachsan($id);
+    }
         function sidebar()
     {
         $this->load->view('template/sidebar');

@@ -22,8 +22,9 @@
                </span>
  </ui-gmap-window>
 
-         <ui-gmap-markers models="filtermarkers" fit="true" idKey="'id'" icon="'icon'" coords="'geometry'" events="map.events" click='Onclick'  doCluster=true>
+         <ui-gmap-markers models="filtermarkers" fit="true" idKey="'id'" icon="'icon'" coords="'geometry'" events="map.events"  doCluster=true>
         </ui-gmap-markers>
+
         <ui-gmap-window  ng-cloak=""
                      show="map.window.show"
                     coords="map.window.model.geometry"

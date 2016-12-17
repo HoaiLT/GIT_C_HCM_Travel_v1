@@ -40,7 +40,11 @@
               }
 </script>
   <style type="text/css">
-
+ html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
  .angular-google-map-container {
     position: absolute;
     top: 0;
@@ -49,24 +53,26 @@
     left: 0;
 }
 .timeline {list-style:none;padding:0 0 20px;position:relative;margin-top:-15px}
-.timeline:before{top:30px;bottom:25px;position:absolute;content:" ";width:3px;background-color:#ccc;left:25px;margin-right:-1.5px}
+.timeline:before
+{top:30px;bottom:25px;position:absolute;content:" ";width:3px;background-color:#ccc;left:40px;margin-right:-1.5px}
+
 .timeline>li,.timeline>li>.timeline-panel
 {margin-bottom:5px;position:relative}
 .timeline>li:after,.timeline>li:before
 {content:" ";display:table}
 .timeline>li:after{clear:both}
 .timeline>li>.timeline-panel{
-  margin-left:70px;
+  margin-left:80px;
   float:left;top:25px;
-  padding:4px 10px 8px 4px;
-  border:1px solid #ccc;
+  padding:4px 5px 8px 4px;
+  border:0px solid #ccc;
   border-radius:5px;
   width:45%;}
 .timeline>li>.timeline-badge
 {
   color:#fff;
-  width:45px;
-  height:45px;
+  width:70px;
+  height:70px;
   line-height:50px;
   font-size:1.2em;
   text-align:center;
@@ -82,10 +88,6 @@
   border-right-width:0;border-left-width:15px;right:-15px;left:auto}
 .timeline>li.timeline-inverted>.timeline-panel:after{
   border-right-width:0;border-left-width:14px;right:-14px;left:auto}
-.timeline-badge.primary{background-color:#2e6da4!important}
-.timeline-badge.success{background-color:#3f903f!important}
-.timeline-badge.warning{background-color:grey !important}
-.timeline-badge.danger{background-color:#d9534f!important}
 .timeline-title{margin-top:0;color:inherit}
   </style>
 </head>
@@ -93,29 +95,47 @@
     <script
      src="http://maps.googleapis.com/maps/api/js?key=AIzaSyAePY8xEeKl8-3U1GqmcrYl6OdPPtyOH5k&sensor=false">
     </script>
-     <nav class="navbar navbar-default navbar-fixed-top" role="navigation" style="padding-right: 5px;margin-bottom:0px">
-            <div class='row' >
-              <div class='col-md-4'>
-                <div class="navbar-header">
-                   <h2><a href="<?php echo base_url(); ?>">Map Online</a></h2>
-                </div>
-                </div>
+     <nav class="navbar navbar-default navbar-fixed-top" role="navigation"
+     style="background-color:white;border:1px solid  #c2dcff;">
+             <div class='row' >
+                <div class='col-md-4' >
+                  <div class="navbar-header" >
+                        <div style="padding-left:8px; border-right:1px solid  #c2dcff;">
+                             <a href="<?php echo base_url(); ?>">
+                                    <img src="<?php echo base_url(); ?>public/map_libs/img/hcm.png"
+                                    style="margin-bottom: 10px;margin-right: 30px;"/>
+                             </a>
+                        </div>
+                    </div>
+                   <div style="padding-right:8px; padding-left:180px;border-right:1px solid #c2dcff;padding-top: 2px;height: 60px;">
+                       <h3 style="margin-bottom: 0px;">Du lịch Hồ Chí Minh</h3>
+                  </div>
+           </div>
                <!--  SEARCH BOX -->
-                  <div class='col-md-6' >
-
+                  <div class='col-md-3' style="border-right:1px solid w3-hover-black; height: 60px; padding-top: 10px;">
+                      <button class="w3-btn  w3-orange w3-round-large"><a style="text-decoration: none;" class="w3-hover-orange" href="<?php echo base_url(); ?>Map_HCM_C/waypoint_map" target="_blank">Kế hoạch của tôi</a></button>
+                  </div>
+                  <div  class='col-md-3' style="border-right:1px solid #c2dcff; height: 60px;">
+                         <div ng-controller="MapkhCtrl" style="margin-left: 0px;width: 300px;">
+                            <div id="custom-search-input">
+                                <div>
+                                    <input type="text" class="search-query form-control" ng-focus="focus=true"  ng-blur="focus = false" ng-model="searchString" placeholder="Tìm điểm trên bản đồ" style="width: 300px;margin-top: 10px;" />
+                                </div>
+                            </div>
+                        </div>
                 </div>
-               <div class='col-md-2'>
-               <div ui-view="login"></div>
-               </div>
+
+               <div class='col-md-2' style="height: 60px;">
+                    <div  ui-view="login" style="margin-top: 10px;"></div>
+             </div>
           </div>
  </nav>
-
     <div class="row" >
-        <div  class="col-md-3" style=" overflow: auto;width:450px; height:600px;" >
+        <div  class="col-md-3" style=" overflow: auto;width:450px; height:650px;" >
             <div ui-view="sidebar_kehoach"></div>
             <div ui-view="sidebar_kehoach_detail"></div>
         </div>
-        <div class="col-md-8" style="border: 0px solid black;height:600px; padding-left:2px; padding-right:2px;margin-right: 0px; margin-left: 2px;">
+        <div class="col-md-8" style="border: 0px solid black;height:650px; padding-left:2px; padding-right:2px;margin-right: 0px; margin-left: 2px;">
             <div ui-view="map_kehoach"></div>
             <div ui-view="map_kehoach_detail"></div>
       </div>

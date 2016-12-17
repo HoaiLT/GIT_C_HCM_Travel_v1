@@ -17,9 +17,9 @@
             closeClick="map.window.closeClick()">
                 <div>
                           <h4>{{map.window.model.properties['ten']}}</h4>
-                              <p  style="width:200px;">Địa chỉ:{{map.window.model.properties['phuong_xa']}}{{map.window.model.properties['quan_huyen']}} </p>
+                              <p  style="width:200px;">Địa chỉ:{{map.window.model.properties['quan_huyen']}} </p>
                          <div class="w3-container" ng-controller="MapkhCtrl">
-                                <iframe ng-src="{{url}}" width=500 height=500 frameborder="0"> </iframe>
+                                <iframe ng-src="{{url}}" width=550 height=350 frameborder="0"> </iframe>
                          </div>
 
                 </div>

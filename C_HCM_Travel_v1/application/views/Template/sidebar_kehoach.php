@@ -288,15 +288,15 @@
                         filter: alpha(opacity=60);
                     }
 </style>
-<div class="row" style="margin-top:50px">
-    <div class="w3-padding w3-xlarge w3-teal">
+<div class="row" style="margin-top:60px" >
+    <div class="w3-padding w3-xlarge w3-teal" >
         <div class="w3-container">
         <a  href="<?php echo base_url(); ?>"> <i class="fa fa-chevron-circle-left" ></i></a>  Tư vấn hành trình du lịch
         </div>
    </div>
-    <div ng-cloak="" ng-controller="MapkhCtrl"  class="w3-container">
-            <div class="timeline-centered">
-            <article class="timeline-entry" ng-repeat="i in kehoach_thamkhao" ng-click="onclickDetail_KH(i)" style="margin-top:10px" >
+<div ng-cloak="" ng-controller="MapkhCtrl"  class="w3-container">
+    <div class="timeline-centered">
+        <article class="timeline-entry" ng-repeat="i in kehoach_thamkhao" ng-click="onclickDetail_KH(i)" style="margin-top:10px" >
                     <div class="timeline-entry-inner">
                         <div class="timeline-icon bg-success">
                             <i class="entypo-feather"></i>
@@ -304,13 +304,11 @@
                         <div class="timeline-label">
                              <h4>{{i.properties['ten_kh']}}</h4>
                              <div>
-                                  <i class="fa fa fa-clock-o" aria-hidden="true"></i>{{i.properties['so_ngay_di']}} ngày
-                                   <i class="fa fa-car" aria-hidden="true"></i> {{i.properties['phuong_tien_di_chuyen']}}
+                                  <i class="fa fa fa-clock-o" aria-hidden="true"></i>{{i.properties['thoi_gian']}}h /{{i.properties['tong_khoangcach']}}km
                             </div>
                         </div>
                     </div>
-            </article>
-
-        </div>
-      </div>
+        </article>
+    </div>
+</div>
 </div>

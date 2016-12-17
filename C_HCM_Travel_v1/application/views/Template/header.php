@@ -186,7 +186,7 @@ function closeNav() {
               <div class='col-md-4' >
                   <div class="navbar-header" >
                       <div id="mySidenav" class="sidenav">
-                            <a   class="w3-container w3-red" href="javascript:void(0)" class="closebtn" onclick="closeNav()"><h3>Travel Hồ Chí Minh</h3></a>
+                            <a   class="w3-container w3-red" href="javascript:void(0)" class="closebtn" onclick="closeNav()"><h3>Du lịch Hồ Chí Minh</h3></a>
                              <a class="w3-hover-black" href="<?php echo base_url(); ?>about.html"><i class="fa fa-home w3-xxlarge" ></i>Giới thiệu</a>
                               <a class="w3-hover-green" href="<?php echo base_url(); ?>Kehoach_C" target="_blank"><i class="fa fa-user-circle-o w3-xxlarge"></i>Tư vấn kế hoạch du lịch</a>
                               <a class="w3-hover-blue" href="<?php echo base_url(); ?>Map_HCM_C/map_directions" target="_blank"> <i class="fa fa-search w3-xxlarge"></i>Tìm đường đi</a>
@@ -224,7 +224,7 @@ function closeNav() {
                             </div>
                             <div class="search">
                                    <ul style="width: 300px;">
-                                       <li  ng-repeat="i in map.markers | filter: searchString" ng-click=" onSidebarClicked(i)" ng-show="searchString">
+                                       <li ng-repeat="i in map.markers | filter: searchString" ng-click=" onSidebarClicked(i)" ng-show="searchString">
                                            <a>
                                             <img class="middle" src={{i.properties['hinh_anh']}} alt={{i.properties['ten']}} width="70px" height="70px"/> <h4>{{i.properties['ten']}}</h4>
                                               <p>Địa chỉ:  {{i.properties['quan_huyen']}}</p>
